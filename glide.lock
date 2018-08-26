@@ -1,6 +1,10 @@
 hash: 8a7528bab6a16a253ecbb6a76c986c100fc17c69f0b4150d1cec5432ba65e539
-updated: 2018-08-26T16:02:09.152274084+07:00
+updated: 2018-08-26T23:19:14.732015223+07:00
 imports:
+- name: github.com/akbarkn/aknenv
+  version: c0f8dc11b77a58d99d8bdff33c908b2243f1403d
+- name: github.com/akbarkn/aknstruct
+  version: a48b99b075d785ccf4fafe4ea870b354c52367ea
 - name: github.com/gin-contrib/sse
   version: 22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae
 - name: github.com/gin-gonic/gin
@@ -15,6 +19,10 @@ imports:
   - proto
 - name: github.com/json-iterator/go
   version: ab8a2e0c74be9d3be70b3184d9acc634935ded82
+- name: github.com/lib/pq
+  version: 90697d60dd844d5ef6ff15135d0203f65d2f53b8
+  subpackages:
+  - oid
 - name: github.com/mattn/go-isatty
   version: 6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c
 - name: github.com/modern-go/concurrent

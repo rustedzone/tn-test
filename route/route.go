@@ -4,6 +4,8 @@ import (
 	"net/http"
 
 	"gopkg.in/gin-gonic/gin.v1"
+
+	deposit "tn-test/deposit/controller"
 )
 
 func Router() *gin.Engine {
@@ -34,5 +36,11 @@ func Router() *gin.Engine {
 			"title": "This Is Dashboard",
 		})
 	})
+
+	api := r.Group("api")
+
+	api.POST("/deposit", deposit.AddDeposit_)
+	api.GET("/deposit/:account", deposit.GetDepositAccount_)
+
 	return r
 }
