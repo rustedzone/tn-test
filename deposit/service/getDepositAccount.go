@@ -16,7 +16,7 @@ func GetDepositAccount(account string) ([]map[string]interface{}, error) {
 
 	var result []map[string]interface{}
 
-	// errResult := make([]map[string]interface{}, 0)
+	errResult := make([]map[string]interface{}, 0)
 
 	rows, err := db.Query(`with sumcash as (
 		select sum(cash) from tx_deposit where account_number=$1
@@ -26,7 +26,7 @@ func GetDepositAccount(account string) ([]map[string]interface{}, error) {
 		log.Println("loc : deposit")
 		log.Println("fn : GetDepositAccount")
 		log.Println("error 1 : ", err.Error())
-		return nil, err
+		return errResult, err
 	}
 	defer rows.Close()
 
@@ -44,7 +44,7 @@ func GetDepositAccount(account string) ([]map[string]interface{}, error) {
 			log.Println("loc : deposit")
 			log.Println("fn : GetDepositAccount")
 			log.Println("error 2 : ", err.Error())
-			return nil, err
+			return errResult, err
 		}
 		d.Date = date.Format("02-01-2006")
 		maps := aknstruct.Map(d)
@@ -52,6 +52,10 @@ func GetDepositAccount(account string) ([]map[string]interface{}, error) {
 	}
 
 	log.Println("result :", result)
+
+	if len(result) < 1 {
+		result = errResult
+	}
 
 	return result, nil
 
