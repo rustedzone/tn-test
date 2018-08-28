@@ -2,8 +2,10 @@ package depositservice
 
 import (
 	"crypto/tls"
+	"fmt"
 	"log"
 	"strconv"
+	"time"
 	"tn-test/conf"
 
 	"github.com/akbarkn/aknenv"
@@ -20,6 +22,7 @@ func sendMail(request map[string]interface{}) error {
 	var target string
 	err := db.QueryRow(`select email from account where account_number=$1`, request["account"]).Scan(&target)
 	if err != nil {
+		log.Println(err.Error())
 		return err
 	}
 
@@ -29,7 +32,8 @@ func sendMail(request map[string]interface{}) error {
 	m.SetHeader("From", aknenv.GetEnv("MAIL_USER"))
 	m.SetHeader("To", target)
 	m.SetHeader("Subject", "Transaction Detail")
-	m.SetBody("text/html", "<p>HELLO TEST</p>")
+	m.SetBody("text/html", setMailBody(request))
+	// m.SetBody("text/html", "<p>HELLO TEST</p>")
 
 	port, err := strconv.Atoi(aknenv.GetEnv("MAIL_SMTP_PORT"))
 	if err != nil {
@@ -49,4 +53,24 @@ func sendMail(request map[string]interface{}) error {
 
 	return nil
 
+}
+
+func setMailBody(request map[string]interface{}) string {
+	var result string
+
+	result = fmt.Sprintf(`
+	<pre>
+		Below Are details of the Transaction,
+
+		timestamp : %s
+		account   : %s
+		deposit   : %f
+
+	</pre>
+	`, time.Now(),
+		request["account"].(string),
+		request["deposit"].(float64),
+	)
+
+	return result
 }
