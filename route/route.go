@@ -24,8 +24,8 @@ func Router() *gin.Engine {
 	r.Static("/img", "./templates/assets/img")
 
 	r.GET("/", func(c *gin.Context) {
-		r.LoadHTMLFiles("templates/views/user/index.html")
-		c.HTML(http.StatusOK, "user/index.html", gin.H{
+		r.LoadHTMLFiles("templates/views/index.html")
+		c.HTML(http.StatusOK, "index.html", gin.H{
 			"title": "This Is Dashboard",
 		})
 	})

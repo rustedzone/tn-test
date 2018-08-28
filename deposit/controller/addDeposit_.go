@@ -2,6 +2,7 @@ package depositcontroller
 
 import (
 	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
 
@@ -24,6 +25,15 @@ func AddDeposit_(c *gin.Context) {
 	}
 
 	log.Println("request :", request)
+
+	if request["date"] == nil || len(request["date"].(string)) < 1 {
+		err := errors.New("date field is required")
+		log.Println(err.Error())
+		c.Error(err)
+		c.JSON(http.StatusInternalServerError, gin.H{"result": false, "error": err.Error()})
+		return
+
+	}
 
 	err = service.AddDeposit(request)
 	if err != nil {
