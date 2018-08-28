@@ -1,0 +1,18 @@
+FROM golang:1.10-alpine3.7
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git
+
+RUN apk add tzdata &&\
+    cp /usr/share/zoneinfo/Asia/Jakarta /etc/localtime &&\
+    echo "Asia/Jakarta" > /etc/timezone &&\
+    apk del tzdata
+
+RUN go get github.com/Masterminds/glide
+
+ADD . /go/src/tn-test
+WORKDIR /go/src/tn-test
+
+RUN glide install
+
+CMD ["go","run","main.go", "-port", "80"]

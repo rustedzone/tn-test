@@ -24,13 +24,6 @@ func Router() *gin.Engine {
 	r.Static("/img", "./templates/assets/img")
 
 	r.GET("/", func(c *gin.Context) {
-		r.LoadHTMLFiles("templates/views/index.html")
-		c.HTML(http.StatusOK, "index.html", gin.H{
-			"title": "Main website",
-		})
-	})
-
-	r.GET("/dashboard", func(c *gin.Context) {
 		r.LoadHTMLFiles("templates/views/user/index.html")
 		c.HTML(http.StatusOK, "user/index.html", gin.H{
 			"title": "This Is Dashboard",
@@ -39,6 +32,9 @@ func Router() *gin.Engine {
 
 	api := r.Group("api")
 
+	api.GET("", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{"result": true, "data": "TN-TEST's Endpoint"})
+	})
 	api.POST("/deposit", deposit.AddDeposit_)
 	api.GET("/deposit/:account", deposit.GetDepositAccount_)
 
