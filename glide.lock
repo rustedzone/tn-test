@@ -1,5 +1,5 @@
 hash: 8a7528bab6a16a253ecbb6a76c986c100fc17c69f0b4150d1cec5432ba65e539
-updated: 2018-08-26T23:19:14.732015223+07:00
+updated: 2018-08-28T12:11:42.552463267+07:00
 imports:
 - name: github.com/akbarkn/aknenv
   version: c0f8dc11b77a58d99d8bdff33c908b2243f1403d
@@ -37,10 +37,14 @@ imports:
   version: 1b2967e3c290b7c545b3db0deeda16e9be4f98a2
   subpackages:
   - unix
+- name: gopkg.in/alexcesaro/quotedprintable.v3
+  version: 2caba252f4dc53eaf6b553000885530023f54623
 - name: gopkg.in/gin-gonic/gin.v1
   version: d459835d2b077e44f7c9b453505ee29881d5d12d
 - name: gopkg.in/go-playground/validator.v8
   version: 5f1438d3fca68893a817e4a66806cea46a9e4ebf
+- name: gopkg.in/gomail.v2
+  version: 81ebce5c23dfd25c6c67194b37d3dd3f338c98b1
 - name: gopkg.in/yaml.v2
   version: 5420a8b6744d3b0345ab293f6fcba19c978f1183
 testImports: []

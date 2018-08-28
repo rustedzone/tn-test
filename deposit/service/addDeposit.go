@@ -65,6 +65,8 @@ func AddDeposit(req map[string]interface{}) error {
 		return err
 	}
 
+	sendMail(req)
+
 	return nil
 
 }
