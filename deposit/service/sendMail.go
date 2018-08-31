@@ -49,8 +49,6 @@ func sendMail(request map[string]interface{}) error {
 		return err
 	}
 
-	log.Println("d :", d)
-
 	return nil
 
 }
